@@ -7,5 +7,7 @@ A megoldásokban nem használok adatellenőrzést és hibakezelést, a feladatok
 
 A feladatok megoldása egy a lehetséges megoldások közül.
 
+Ajánlott Python verzió: 3.10 vagy újabb
+
 Repository language: hungarian  
 Code language: Python
