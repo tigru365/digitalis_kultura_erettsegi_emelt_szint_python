@@ -1,29 +1,31 @@
-import os.path
+from pathlib import Path
 
 # 1. feladat
-agyasok_szama = 0
 felajanlasok = []
-
-with open(os.path.join(os.path.curdir, "forras", "felajanlas.txt"), "rt") as forrasfajl:
+with open(Path("forras","felajanlas.txt"), "rt") as forrasfajl:
     agyasok_szama = int(forrasfajl.readline().strip())
     for sor in forrasfajl:
-        sor_list = sor.strip().split()
+        adatok = sor.strip().split()
         
-        felajanlas = {}
-        felajanlas['elso'] = int(sor_list[0])
-        felajanlas['utolso'] = int(sor_list[1])
-        felajanlas['szin'] = sor_list[2]
+        felajanlas = {
+            'elso': int(adatok[0]),
+            'utolso': int(adatok[1]),
+            'szin': adatok[2],
+        }
         felajanlasok.append(felajanlas)
 
 # 2. feladat
 print("2. feladat")
+
 print(f"A felajánlások száma: {len(felajanlasok)}\n")
 
 # 3. feladat
 print("3. feladat")
+
 bejarat_ultetok = [str(i + 1) for i, f in enumerate(felajanlasok)
                    if f['elso'] > f['utolso'] or (f['elso'] == 1 and f['utolso'] == agyasok_szama)]
-print(f"A bejárat mindkét oldalán ültetők: {' '.join(bejarat_ultetok)}")
+
+print(f"A bejárat mindkét oldalán ültetők: {' '.join(bejarat_ultetok)}\n")
 
 # 4. feladat
 print("4. feladat")
@@ -42,14 +44,15 @@ for felajanlas in felajanlasok:
     if (sorszam in felajanlas['agyasok']):
         talalat += 1
         ultetes_osszes.append(felajanlas['szin'])
+
 print(f"A felajánlók száma: {talalat}")
 
 if len(ultetes_osszes) > 0:
     print(f"A virágágyás színe, ha csak az első ültet: {ultetes_osszes[0]}")
     szinek = set([szin for szin in ultetes_osszes])
-    print(f"A virágágyás színei: {' '.join(szinek)}")
+    print(f"A virágágyás színei: {' '.join(szinek)}\n")
 else:
-    print("Ezt az ágyást nem ültetik be.")
+    print("Ezt az ágyást nem ültetik be.\n")
 
 # 5. feladat
 print("5. feladat")
@@ -77,6 +80,6 @@ for sorszam, felajanlas in enumerate(felajanlasok, start = 1):
             ultetesek[i - 1][0] = felajanlas['szin']
             ultetesek[i - 1][1] = sorszam
 
-with open(os.path.join(os.path.curdir, "szinek.txt"), "wt", encoding="utf-8") as celfajl:
+with open(Path("szinek.txt"), "wt", encoding="utf-8") as celfajl:
     for ultetes in ultetesek:
         celfajl.write(f"{ultetes[0]} {ultetes[1]}\n")
