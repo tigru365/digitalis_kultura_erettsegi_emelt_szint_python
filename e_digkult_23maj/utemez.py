@@ -2,7 +2,9 @@ from pathlib import Path
 
 # 1. feladat
 taborok = []
-with open(Path("forras", "taborok.txt"), "rt") as forrasfajl:
+
+fajl = Path("forras","taborok.txt")
+with fajl.open() as forrasfajl:
     for sor in forrasfajl:
         adatok = sor.strip().split('\t')
 
@@ -89,7 +91,9 @@ tanulo_taborai = [t for t in taborok if tanulo in t['diakok']]
 tanulo_taborai.sort(key=lambda tabor: sorszam(tabor['kezdes'][0], tabor['kezdes'][1]))
 
 tabor_utkozes = False
-with open(Path("egytanulo.txt"), "wt", encoding="utf-8") as celfajl:
+
+fajl = Path("egytanulo.txt")
+with fajl.open("w", encoding="utf-8") as celfajl:
     for i, tabor in enumerate(tanulo_taborai):
         celfajl.write(
             f"{tabor['kezdes'][0]}.{tabor['kezdes'][1]}-"

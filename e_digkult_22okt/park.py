@@ -2,7 +2,9 @@ from pathlib import Path
 
 # 1. feladat
 felajanlasok = []
-with open(Path("forras","felajanlas.txt"), "rt") as forrasfajl:
+
+fajl = Path("forras","felajanlas.txt")
+with fajl.open() as forrasfajl:
     agyasok_szama = int(forrasfajl.readline().strip())
     for sor in forrasfajl:
         adatok = sor.strip().split()
@@ -81,6 +83,7 @@ for sorszam, felajanlas in enumerate(felajanlasok, start = 1):
             ultetesek[i - 1][0] = felajanlas['szin']
             ultetesek[i - 1][1] = sorszam
 
-with open(Path("szinek.txt"), "wt", encoding="utf-8") as celfajl:
+fajl = Path("szinek.txt")
+with fajl.open("w", encoding="utf-8") as celfajl:
     for ultetes in ultetesek:
         celfajl.write(f"{ultetes[0]} {ultetes[1]}\n")
