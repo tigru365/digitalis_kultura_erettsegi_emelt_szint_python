@@ -71,6 +71,9 @@ print("6. feladat")
 
 ho = int(input("hó: "))
 nap = int(input("nap: "))
+# ho = 8
+# nap = 1
+
 napok = sorszam(ho, nap)
 meg_tart = [t for t in taborok
             if sorszam(t['kezdes'][0], t['kezdes'][1])
@@ -80,6 +83,7 @@ print(f"Ekkor éppen {len(meg_tart)} tábor tart.")
 
 # 7. feladat
 tanulo = input("Adja meg egy tanuló betűjelét: ")
+# tanulo = "L"
 
 tanulo_taborai = [t for t in taborok if tanulo in t['diakok']]
 tanulo_taborai.sort(key=lambda tabor: sorszam(tabor['kezdes'][0], tabor['kezdes'][1]))

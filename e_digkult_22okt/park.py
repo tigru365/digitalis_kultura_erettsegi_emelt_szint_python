@@ -31,6 +31,7 @@ print(f"A bejárat mindkét oldalán ültetők: {' '.join(bejarat_ultetok)}\n")
 print("4. feladat")
 
 sorszam = int(input("Adja meg az ágyás sorszámát! "))
+# sorszam = 100
 
 talalat = 0
 ultetes_osszes = []
