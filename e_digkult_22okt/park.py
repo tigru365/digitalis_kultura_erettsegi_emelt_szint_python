@@ -1,10 +1,13 @@
-from pathlib import Path
+""" Virágágyások (2022.10.25)
+"""
 
 # 1. feladat
+from pathlib import Path
+
 felajanlasok = []
 
 fajl = Path("forras","felajanlas.txt")
-with fajl.open() as forrasfajl:
+with fajl.open(encoding="ascii") as forrasfajl:
     agyasok_szama = int(forrasfajl.readline().strip())
     for sor in forrasfajl:
         adatok = sor.strip().split()
@@ -39,12 +42,12 @@ talalat = 0
 ultetes_osszes = []
 for felajanlas in felajanlasok:
     if felajanlas['elso'] > felajanlas['utolso']:
-        agyas_sorszamok = [x for x in range(1, felajanlas['utolso'] + 1)]
-        agyas_sorszamok += [x for x in range(felajanlas['elso'], agyasok_szama + 1)]
+        agyas_sorszamok = list(range(1, felajanlas['utolso'] + 1))
+        agyas_sorszamok += list(range(felajanlas['elso'], agyasok_szama + 1))
     else:
-        agyas_sorszamok = [x for x in range(felajanlas['elso'], felajanlas['utolso'] + 1)]
+        agyas_sorszamok = list(range(felajanlas['elso'], felajanlas['utolso'] + 1))
     felajanlas['agyasok'] = agyas_sorszamok
-    if (sorszam in felajanlas['agyasok']):
+    if sorszam in felajanlas['agyasok']:
         talalat += 1
         ultetes_osszes.append(felajanlas['szin'])
 
@@ -52,7 +55,7 @@ print(f"A felajánlók száma: {talalat}")
 
 if len(ultetes_osszes) > 0:
     print(f"A virágágyás színe, ha csak az első ültet: {ultetes_osszes[0]}")
-    szinek = set([szin for szin in ultetes_osszes])
+    szinek = sorted(set(ultetes_osszes))
     print(f"A virágágyás színei: {' '.join(szinek)}\n")
 else:
     print("Ezt az ágyást nem ültetik be.\n")

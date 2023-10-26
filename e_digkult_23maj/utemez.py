@@ -1,10 +1,13 @@
-from pathlib import Path
+""" Ütemezés (2023.05.22)
+"""
 
 # 1. feladat
+from pathlib import Path
+
 taborok = []
 
 fajl = Path("forras","taborok.txt")
-with fajl.open() as forrasfajl:
+with fajl.open(encoding="ascii") as forrasfajl:
     for sor in forrasfajl:
         adatok = sor.strip().split('\t')
 
@@ -37,7 +40,7 @@ else:
 # 4. feladat
 print("4. feladat")
 
-max_resztvevo = max([len(t['diakok']) for t in taborok])
+max_resztvevo = max(len(t['diakok']) for t in taborok)
 legnepszerubbek = [t for t in taborok if len(t['diakok']) == max_resztvevo]
 
 print("Legnépszerűbbek:")
@@ -46,15 +49,20 @@ for leg in legnepszerubbek:
 
 # 5. feladat
 def sorszam(honap: int, nap: int) -> int:
+    """ A függvény megadja, hogy a paraméterként kapott hónap és nap a nyári szünet hányadik napja
+    """
     if honap == 6:
-        return nap - 15
+        hanyadik_nap = nap - 15
     elif honap == 7:
-        return 15 + nap
+        hanyadik_nap = 15 + nap
     else:
-        return 15 + 31 + nap
+        hanyadik_nap = 15 + 31 + nap
+    return hanyadik_nap
 
-### Általánosabb megoldás, ahol a kezdeti feltételek szabadon módosíthatóak
+## Általánosabb megoldás, ahol a kezdeti feltételek szabadon módosíthatóak
 # def sorszam(honap: int, nap: int) -> int:
+#     """ A függvény megadja, hogy a paraméterként kapott hónap és nap a nyári szünet hányadik napja
+#     """
 #     elso_honap = 6
 #     elso_nap = 16
 #     ho_napok = (30, 31, 31)
@@ -71,12 +79,12 @@ def sorszam(honap: int, nap: int) -> int:
 # 6. feladat
 print("6. feladat")
 
-ho = int(input("hó: "))
-nap = int(input("nap: "))
-# ho = 8
-# nap = 1
+be_honap = int(input("hó: "))
+be_nap = int(input("nap: "))
+# be_honap = 8
+# be_nap = 1
 
-napok = sorszam(ho, nap)
+napok = sorszam(be_honap, be_nap)
 meg_tart = [t for t in taborok
             if sorszam(t['kezdes'][0], t['kezdes'][1])
             <= napok <= sorszam(t['vege'][0], t['vege'][1])]
