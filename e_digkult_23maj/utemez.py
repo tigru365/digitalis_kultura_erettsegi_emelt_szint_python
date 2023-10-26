@@ -6,7 +6,7 @@ from pathlib import Path
 
 taborok = []
 
-fajl = Path("forras","taborok.txt")
+fajl = Path.cwd() / "forras" / "taborok.txt"
 with fajl.open(encoding="ascii") as forrasfajl:
     for sor in forrasfajl:
         adatok = sor.strip().split('\t')
@@ -100,7 +100,7 @@ tanulo_taborai.sort(key=lambda tabor: sorszam(tabor['kezdes'][0], tabor['kezdes'
 
 tabor_utkozes = False
 
-fajl = Path("egytanulo.txt")
+fajl = Path.cwd() / "egytanulo.txt"
 with fajl.open("w", encoding="utf-8") as celfajl:
     for i, tabor in enumerate(tanulo_taborai):
         celfajl.write(

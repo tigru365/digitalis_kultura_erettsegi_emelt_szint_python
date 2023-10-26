@@ -6,7 +6,7 @@ from pathlib import Path
 
 felajanlasok = []
 
-fajl = Path("forras","felajanlas.txt")
+fajl = Path.cwd() / "forras" / "felajanlas.txt"
 with fajl.open(encoding="ascii") as forrasfajl:
     agyasok_szama = int(forrasfajl.readline().strip())
     for sor in forrasfajl:
@@ -86,7 +86,7 @@ for sorszam, felajanlas in enumerate(felajanlasok, start = 1):
             ultetesek[i - 1][0] = felajanlas['szin']
             ultetesek[i - 1][1] = sorszam
 
-fajl = Path("szinek.txt")
+fajl = Path.cwd() / "szinek.txt"
 with fajl.open("w", encoding="utf-8") as celfajl:
     for ultetes in ultetesek:
         celfajl.write(f"{ultetes[0]} {ultetes[1]}\n")
